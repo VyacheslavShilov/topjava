@@ -11,7 +11,7 @@
 <h2>Meals</h2>
 
 
-<table>
+<table border="2">
     <tr>
         <th>Дата</th>
         <th>Описание</th>
@@ -20,13 +20,15 @@
     </tr>
     <c:forEach var="meal" items="${meal_list}">
 
-        <c:if test="${meal.exceed == true}">
+        <tr bgcolor = ${meal.exceed == true ? "#FF5252" : "#64FFDA"}>
+
+        <%--<c:if test="${meal.exceed == true}">
             <tr bgcolor = red>
         </c:if>
 
         <c:if test="${meal.exceed == false}">
             <tr bgcolor = green>
-        </c:if>
+        </c:if>--%>
 
         <%--<td> ${meal.dateTime} </td>--%>
         <javatime:parseLocalDateTime value="${meal.dateTime}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDate"/>
