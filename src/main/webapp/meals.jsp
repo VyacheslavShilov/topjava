@@ -20,6 +20,24 @@
 <section>
     <h3><a href="index.html">Home</a></h3>
     <h2>Meals</h2>
+
+    <form>
+        <p>
+            <label for="date-after">От даты: </label>
+            <input type="date" id="date-after" name="date-after">
+            <label for="time-after">От времени: </label>
+            <input type="time" id="time-after" name="time-after">
+        </p>
+        <p>
+            <label for="date-before">До даты: </label>
+            <input type="date" id="date-before" name="date-before">
+            <label for="time-before">До времени: </label>
+            <input type="time" id="time-before" name="time-before">
+        </p>
+        <button type="submit">Очистить</button>
+        <button type="submit">Применить</button>
+    </form>
+
     <a href="meals?action=create">Add Meal</a>
     <hr/>
     <table border="1" cellpadding="8" cellspacing="0">
