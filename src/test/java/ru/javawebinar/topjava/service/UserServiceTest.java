@@ -42,6 +42,7 @@ public class UserServiceTest {
         User created = service.create(newUser);
         newUser.setId(created.getId());
         assertMatch(service.getAll(), ADMIN, newUser, USER);
+        System.out.println();
     }
 
     @Test(expected = DataAccessException.class)
