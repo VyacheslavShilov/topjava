@@ -13,21 +13,21 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @NamedQueries({
-        @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id and m.user=:user_id"),
-        @NamedQuery(name = Meal.ALL_SORTED, query = "SELECT m FROM Meal m WHERE m.user=:user_id ORDER BY m.dateTime DESC "),
+        @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id and m.user.id=:user_id"),
+        @NamedQuery(name = Meal.ALL_SORTED, query = "SELECT m FROM Meal m WHERE m.user.id=:user_id ORDER BY m.dateTime DESC "),
         @NamedQuery(name = Meal.ALL_SORTED_BETWEEN, query = "SELECT m FROM Meal m " +
-                "WHERE m.user=:user_id and m.dateTime>=:start_date and m.dateTime<=:end_date " +
+                "WHERE m.user.id=:user_id and m.dateTime>=:start_date and m.dateTime<=:end_date " +
                 "ORDER BY m.dateTime DESC "),
 })
 @Entity
 @Table(name = "meals")
 public class Meal extends AbstractBaseEntity {
 
-    public static final String DELETE = "User.delete";
-    public static final String ALL_SORTED = "User.getAllSorted";
-    public static final String ALL_SORTED_BETWEEN = "User.getAllSortedBetween";
+    public static final String DELETE = "Meal.delete";
+    public static final String ALL_SORTED = "Meal.getAllSorted";
+    public static final String ALL_SORTED_BETWEEN = "Meal.getAllSortedBetween";
 
-    @Column(name = "date_time", nullable = false)
+    @Column(name = "date_time")
     @NotNull
     private LocalDateTime dateTime;
 
@@ -35,14 +35,13 @@ public class Meal extends AbstractBaseEntity {
     @NotNull
     private String description;
 
-    @Column(name = "calories", nullable = false)
-    @NotBlank
+    @Column(name = "calories")
     @Range(min = 10, max = 10000)
     private int calories;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @NotNull
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
+    @NotNull
     private User user;
 
     public Meal() {
