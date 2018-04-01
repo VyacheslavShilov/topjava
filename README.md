@@ -1,6 +1,9 @@
+Java Enterprise Online Project
+
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/96c3550422194edeb24f8f7333a3854f)](https://www.codacy.com/app/VyacheslavShilov/topjava?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=VyacheslavShilov/topjava&amp;utm_campaign=Badge_Grade)
 [![Dependency Status](https://www.versioneye.com/user/projects/5ab3c71a0fb24f4489395b4d/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5ab3c71a0fb24f4489395b4d)
-Java Enterprise Online Project 
+[![Build Status](https://travis-ci.org/VyacheslavShilov/topjava.svg?branch=master)](https://travis-ci.org/VyacheslavShilov/topjava)
+
 ===============================
 Разработка полнофункционального Spring/JPA Enterprise приложения c авторизацией и правами доступа на основе ролей с использованием наиболее популярных инструментов и технологий Java: Maven, Spring MVC, Security, JPA(Hibernate), REST(Jackson), Bootstrap (css,js), datatables, jQuery + plugins, Java 8 Stream and Time API и хранением в базах данных Postgresql и HSQLDB.
 
