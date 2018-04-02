@@ -19,12 +19,12 @@
         <jdbc:script encoding="utf-8" location="classpath:db/populateDB.sql"/>
     </jdbc:initialize-database>
 
-    <bean id="dataSource"
-          class="${class}"
-          p:driverClassName="${database.driverClassName}"
-          p:url="${database.url}"
-          p:username="${database.username}"
-          p:password="${database.password}"/>
+   <!-- <bean id="dataSource" class="${database.class}">
+        <property name="driverClassName" value="${database.driverClassName}"/>
+        <property name="url" value="${database.url}"/>
+        <property name="username" value="${database.username}"/>
+        <property name="password" value="${database.password}"/>
+    </bean>-->
 
 
 
@@ -65,23 +65,23 @@
         <context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>
 
         <!--no pooling-->
-        <!--<bean id="dataSource"
+        <bean id="dataSource"
               class="org.springframework.jdbc.datasource.DriverManagerDataSource"
               p:driverClassName="org.hsqldb.jdbcDriver"
               p:url="${database.url}"
               p:username="${database.username}"
-              p:password="${database.password}"/>-->
+              p:password="${database.password}"/>
     </beans>
 
     <beans profile="postgres">
         <context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>
 
-       <!-- <bean id="dataSource"
+        <bean id="dataSource"
               class="org.apache.tomcat.jdbc.pool.DataSource"
               p:driverClassName="org.postgresql.Driver"
               p:url="${database.url}"
               p:username="${database.username}"
-              p:password="${database.password}"/>-->
+              p:password="${database.password}"/>
     </beans>
 
     <beans profile="jdbc">
