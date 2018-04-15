@@ -1,9 +1,13 @@
 package ru.javawebinar.topjava.service;
 
+import org.junit.Assume;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.DataAccessException;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
@@ -15,24 +19,41 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import static ru.javawebinar.topjava.TestUtil.itsBadProfiles;
 import static ru.javawebinar.topjava.UserTestData.*;
 
 public abstract class AbstractUserServiceTest extends AbstractServiceTest {
+
+    @Autowired private ApplicationContext applicationContext;
 
     @Autowired
     protected UserService service;
 
     @Autowired
+    private Environment environment;
+
     private CacheManager cacheManager;
 
-    @Autowired
     protected JpaUtil jpaUtil;
+
+
+
 
     @Before
     public void setUp() throws Exception {
-        cacheManager.getCache("users").clear();
-        jpaUtil.clear2ndLevelHibernateCache();
+
+     //   Assume.assumeFalse(itsBadProfiles("postgres","jdbc", environment));
+
+        if (!itsBadProfiles("postgres","jdbc", environment)) {
+            jpaUtil = applicationContext.getBean(JpaUtil.class);
+            cacheManager = applicationContext.getBean(CacheManager.class);
+
+            cacheManager.getCache("users").clear();
+            jpaUtil.clear2ndLevelHibernateCache();
+        }
     }
+
+
 
     @Test
     public void create() throws Exception {
@@ -92,6 +113,8 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
 
     @Test
     public void testValidation() throws Exception {
+        Assume.assumeFalse(itsBadProfiles("postgres","jdbc", environment));
+
         validateRootCause(() -> service.create(new User(null, "  ", "mail@yandex.ru", "password", Role.ROLE_USER)), ConstraintViolationException.class);
         validateRootCause(() -> service.create(new User(null, "User", "  ", "password", Role.ROLE_USER)), ConstraintViolationException.class);
         validateRootCause(() -> service.create(new User(null, "User", "mail@yandex.ru", "  ", Role.ROLE_USER)), ConstraintViolationException.class);
