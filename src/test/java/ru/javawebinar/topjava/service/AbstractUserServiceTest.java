@@ -37,12 +37,9 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
     protected JpaUtil jpaUtil;
 
 
-
-
     @Before
     public void setUp() throws Exception {
 
-     //   Assume.assumeFalse(itsBadProfiles("postgres","jdbc", environment));
 
         if (!itsBadProfiles("postgres","jdbc", environment)) {
             jpaUtil = applicationContext.getBean(JpaUtil.class);
