@@ -81,8 +81,12 @@ public class MealRestControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    public void getBetween() throws Exception {
-        mockMvc.perform(get(REST_MEAL_URL + "filter?startDate='2015-04-31T10:15:30'"))
+    public void testGetBetween() throws Exception {
+        mockMvc.perform(get(REST_MEAL_URL + "filter?" +
+                "startDate=2015-05-31T10:15:30" +
+                "&startTime=2015-05-31T10:15:30" +
+                "&endDate=2015-05-31T10:15:30" +
+                "&endTime=2015-05-31T20:15:30"))
                 .andDo(print())
                 .andExpect(status().isOk());
 
