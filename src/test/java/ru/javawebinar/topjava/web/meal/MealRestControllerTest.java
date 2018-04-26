@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
 
 public class MealRestControllerTest extends AbstractControllerTest {
 
-    private static final String REST_MEAL_URL = MealRestController.REST_MEAL_URL + '/';
+    private static final String REST_MEAL_URL = MealRestController.REST_MEAL_URL + "/";
 
     @Test
     public void testDelete() throws Exception {
@@ -83,8 +83,8 @@ public class MealRestControllerTest extends AbstractControllerTest {
     @Test
     public void testGetBetween() throws Exception {
         mockMvc.perform(get(REST_MEAL_URL + "filter?" +
-                "startDate=2015-05-31T10:15:30" +
-                "&startTime=2015-05-31T10:15:30" +
+                "startDate=2015-05-30T10:15:30" +
+                "&startTime=2015-05-30T10:15:30" +
                 "&endDate=2015-05-31T10:15:30" +
                 "&endTime=2015-05-31T20:15:30"))
                 .andDo(print())
