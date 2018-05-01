@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/ajax/profile/meals")
-public class MealAjaxComtroller extends AbstractMealController {
+public class MealAjaxController extends AbstractMealController {
 
     @Override
     @GetMapping("/{id}")
