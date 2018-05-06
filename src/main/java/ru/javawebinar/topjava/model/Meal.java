@@ -3,6 +3,7 @@ package ru.javawebinar.topjava.model;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Range;
+import ru.javawebinar.topjava.util.MealsUtil;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -24,21 +25,23 @@ import java.time.LocalTime;
 @Entity
 @Table(name = "meals", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "date_time"}, name = "meals_unique_user_datetime_idx")})
 public class Meal extends AbstractBaseEntity {
+
+
     public static final String ALL_SORTED = "Meal.getAll";
     public static final String DELETE = "Meal.delete";
     public static final String GET_BETWEEN = "Meal.getBetween";
 
     @Column(name = "date_time", nullable = false)
-    @NotNull
+    @NotNull(groups = {MealsUtil.CreateAndUpdateValidation.class})
     private LocalDateTime dateTime;
 
     @Column(name = "description", nullable = false)
-    @NotBlank
-    @Size(min = 2, max = 120)
+    @NotBlank(groups = {MealsUtil.CreateAndUpdateValidation.class})
+    @Size(min = 2, max = 120, groups = {MealsUtil.CreateAndUpdateValidation.class})
     private String description;
 
     @Column(name = "calories", nullable = false)
-    @Range(min = 10, max = 5000)
+    @Range(min = 10, max = 5000, groups = {MealsUtil.CreateAndUpdateValidation.class})
     private int calories;
 
     @ManyToOne(fetch = FetchType.LAZY)
